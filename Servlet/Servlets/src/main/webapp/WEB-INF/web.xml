@@ -1,0 +1,28 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <!--Also known as the deployment descriptor this file is in charge of mapping url pattern
+  to the servlets that would handle requests sent to the url -->
+  
+  <!-- Contains info about the servlet we're making avaialble to hanlde requests' -->
+  <servlet>
+   <!--How we will reference the servlet in this deployment descritpion -->
+  
+  <servlet-name>HelloServlet </servlet-name>
+  
+  <!--Actual class of servlet so the server knows which class to instantiate or call -->
+  <servlet-class>com.revature.servlets.HelloServlet</servlet-class>
+ 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>HelloServlet</servlet-name>
+  <url-pattern>/*</url-pattern>
+  </servlet-mapping>
+  
+ 
+ 
+  
+</web-app>
