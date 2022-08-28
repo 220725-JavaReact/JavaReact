@@ -19,7 +19,7 @@ public class EmployeeLogin {
         Employee filteredEmployee = employeeDao.getEmployeeByEmail(email);
         // logic for printing out customer info
         
-        StoreLocation.storeLocation();
+        StoreLocation.storeLocation(filteredEmployee);
         if (filteredEmployee == null)
             System.out.println("No Employee found with that email :<");
         else {

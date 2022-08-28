@@ -1,6 +1,6 @@
 package com.revature.pitabarista.models;
 
-public class Customer {
+public class Customer extends Person {
     private int id;
     private String firstName; 
     private String lastName;

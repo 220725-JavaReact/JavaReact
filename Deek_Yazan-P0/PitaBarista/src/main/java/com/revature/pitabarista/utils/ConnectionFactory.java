@@ -15,7 +15,7 @@ public class ConnectionFactory {
     static {
    
         try {
-            System.out.println("Loading driver we are in ConnectionFactory");
+           // System.out.println("Loading driver we are in ConnectionFactory");
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
@@ -25,7 +25,7 @@ public class ConnectionFactory {
 
   
     public static Connection getConnection() {
-        System.out.println("executing get connection method in class ConnectionFactory");
+       // System.out.println("executing get connection method in class ConnectionFactory");
      
         try {
             if (connection == null || connection.isClosed()) {
@@ -36,7 +36,7 @@ public class ConnectionFactory {
                 try {
                   
                     connection = DriverManager.getConnection(db_url, db_user, db_password);
-                    System.out.println("finishing executiong of get connection");
+                    //System.out.println("finishing executiong of get connection");
                     return connection;
                 } catch (SQLException ex) {
                     ex.printStackTrace();

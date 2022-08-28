@@ -8,6 +8,7 @@ import com.revature.pitabarista.models.Customer;
 import com.revature.pitabarista.models.Employee;
 import com.revature.pitabarista.ui.CustomerLogin;
 import com.revature.pitabarista.ui.EmployeeLogin;
+import com.revature.pitabarista.ui.StoreLocation;
 
 public class Driver {
 	
@@ -15,13 +16,14 @@ public class Driver {
 	     CustomerDAO customerDao = new CustomerDAO();
 	     EmployeeDAO employeeDao = new EmployeeDAO();
 		 Scanner scan = new Scanner(System.in);
+		 boolean isActive = true;
 		 String userInput = "";
 		
 		
 		System.out.println("Weclome to Pita Barista Cafe, your favorite local coffee shop here in Arizona");
 		System.out.println("where you can get your morning going with our hot & cold drinks as well as our breakfast menu");
 		
-		while(!userInput.equals("x")) {
+		while(true) {
 			System.out.println("Good morning sunshine, here is our store menu: ");
 			System.out.println("What would you like to do today ? ");
 			System.out.println("[1] Customer Sign in ");
@@ -31,9 +33,11 @@ public class Driver {
 			
 	
 	        userInput = scan.nextLine();
+	        
 			switch(userInput) {
 			case "1":
 				System.out.println("Hello please sign in here ");
+		
 				CustomerLogin.customerLogin(scan);
 			break;
 			case "2":
@@ -47,7 +51,7 @@ public class Driver {
 				System.out.println("Enter your first name: ");
 				newCustomer.setFirstName(scan.nextLine());
 				
-				System.out.println("Enter your last naame: ");
+				System.out.println("Enter your last name: ");
 				newCustomer.setLastName(scan.nextLine());
 				System.out.println("Enter your email: ");
 				newCustomer.setEmail(scan.nextLine());
@@ -55,10 +59,11 @@ public class Driver {
 				newCustomer.setPassword(scan.nextLine());
 				
 				customerDao.addCustomer(newCustomer);
-				
+			
 				break; 
 			case "x":
-				System.out.println("Thanks for shopping!");
+			     isActive = false;
+				System.out.println("Thanks for shopping! GOOD BYE!");
 				break;
 			default:
 				System.out.println("Invalid Input");

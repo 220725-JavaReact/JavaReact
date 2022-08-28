@@ -13,24 +13,30 @@ import com.revature.pitabarista.utils.ConnectionFactory;
 
 public class StoreFrontDAO {
 	
+	//public static void main(String[] args) {
+	//	StoreFront myStore = new StoreFrontDAO().getById(3);
+	//	System.out.println(myStore);
+	//}
 	
 	
 	// ========get store front my id =============
 	public StoreFront getById(int id) {
+		StoreFront store = null;
 		try(Connection connection = ConnectionFactory.getConnection()){
-			String query = "select * from storefronts where storefront_id = ?";
-			PreparedStatement pstmt = connection.prepareStatement(query); 
-			pstmt.setInt(1, id);
-			ResultSet rs = pstmt.executeQuery();
-			if(rs.next()) {
-				return new StoreFront(rs.getInt("id"), rs.getString("storeName"), rs.getString("storeAddress"));
+			String query = "select * from storefronts where id = " + id + ";";
+			Statement pstmt = connection.createStatement(); 
+		
+			ResultSet rs = pstmt.executeQuery(query);
+			
+			while(rs.next()) {
+				store = new StoreFront(rs.getInt("id"), rs.getString("store_name"), rs.getString("store_address"));
+				
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			return null;
+	
 		}
-		return null;
+		return store;
 	}
 	
 	//==========get all stores ========
@@ -41,7 +47,7 @@ public class StoreFrontDAO {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
-				storeFronts.add(new StoreFront(rs.getInt("store_id"), rs.getString("store_name"), rs.getString("store_address")));
+				storeFronts.add(new StoreFront(rs.getInt("id"), rs.getString("store_name"), rs.getString("store_address")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

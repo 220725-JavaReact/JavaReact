@@ -9,6 +9,8 @@ import com.revature.pitabarista.dl.CustomerDAO;
 import com.revature.pitabarista.models.Customer;
 
 public class CustomerLogin {
+	
+	public static Customer loginCustomer = null; 
 	private static CustomerDAO login = new CustomerDAO();
 	public static void customerLogin(Scanner scan) {
 		
@@ -24,22 +26,23 @@ public class CustomerLogin {
 			System.out.println("Enter your password: ");
 			String password = scan.nextLine();
 			
-			Customer loginCustomer = login.getCustomerByEmail(email);
+			 loginCustomer = login.getCustomerByEmail(email);
 			
 			if(loginCustomer == null || !loginCustomer.getPassword().equals(password)) {
 				System.out.println("Incorrect Email or Customer not found");
 				isActive = false;
 				break;
 			} else {
-				System.out.println("continue shopping");
-				Shopping.shop(loginCustomer);
 				
-				isActive = false;
+				  StoreLocation.storeLocation(loginCustomer);
+				//Shopping.shop(loginCustomer);
+				
+				
 				
 				
 			}
 			
-			
+			isActive = false;
 		}
 		
 		

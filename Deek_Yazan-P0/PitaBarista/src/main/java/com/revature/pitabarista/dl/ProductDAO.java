@@ -36,6 +36,7 @@ public class ProductDAO {
 
 	//=========get product by id ================ 
 	public Product getById(int id) {
+		Product product = null;
 		try(Connection connection = ConnectionFactory.getConnection()){
 			String query = "select * from products where id = ?";
 			PreparedStatement pstmt = connection.prepareStatement(query);
@@ -43,46 +44,18 @@ public class ProductDAO {
 			ResultSet rs = pstmt.executeQuery()
 ;
 			if(rs.next()) {
-				return new Product(rs.getInt("product_id"), rs.getString("product_name"), rs.getDouble("price"), rs.getString("description"));
+				product = new Product();
+				product.setId(rs.getInt("id"));
+				product.setProductName(rs.getString("product_name"));
+				product.setDescription(rs.getString("description"));
+				product.setPrice(rs.getDouble("price"));
+				
 			}
 			
 		} catch (SQLException e) {
-			return null;
-		}
-		return null;
-	}
-	
-	// ===========add product================ 
-	
-	public void addProduct(Product newProduct) {
-		try(Connection connection = ConnectionFactory.getConnection()){
-			String query = "insert into products (product_name, price, description) values (?, ?, ?)";
-			PreparedStatement pstmt = connection.prepareStatement(query);
-			pstmt.setString(1, newProduct.getProductName());
-			pstmt.setDouble(2, newProduct.getPrice());
-			pstmt.setString(3, newProduct.getDescription());
-	
-			pstmt.execute();
-		} catch (SQLException e) {
 			
-			System.out.println("Something went wrong");
-		
 		}
+		return product;
 	}
-	// ===========Remove Product ================
-	public void removeProduct(Product newProduct) {
-		try(Connection connection = ConnectionFactory.getConnection()){
-			String query = "delete from products where id = ?";
-			PreparedStatement pstmt = connection.prepareStatement(query); 
-			pstmt.setInt(1, newProduct.getId());
-			ResultSet rs = pstmt.executeQuery();			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-		}
-	}
-	
-	
-	
 }
-
 
